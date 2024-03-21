@@ -1,4 +1,4 @@
-# SmartCallc
+# SmartCalc
 
 Calculator on C/C++
 
@@ -7,6 +7,7 @@ Calculator on C/C++
 0. [Information](#information)
 1. [Arithmetic operators](#arithmetic-operators)
 2. [Functions](#functions)
+3. [SmartCalc interface](#smartcalc-interface)
 
 ## Information
 
@@ -60,3 +61,6 @@ Besides calculating expressions, it supports the use of the _x_ variable and the
 | Computes square root | sqrt(x) |
 | Computes natural logarithm | ln(x) |
 | Computes common logarithm | log(x) |
+
+## SmartCalc Interface
+![alt text](docs/test.gif)

@@ -51,14 +51,14 @@ uninstall:
 	@rm -rf $(QT_APP_FOLDER)
 	@echo " Done."
 
-test: my_smart_calc.a $(TEST_OBJS)
-	$(CC) $(CFLAGS) $(TEST_OBJS) $(LFLAGS) my_smart_calc.a -o test.out
+test: s21_smart_calc.a $(TEST_OBJS)
+	$(CC) $(CFLAGS) $(TEST_OBJS) $(LFLAGS) s21_smart_calc.a -o test.out
 	./test.out
 
-my_smart_calc.a: $(OBJS)
+s21_smart_calc.a: $(OBJS)
 	@mkdir -p $(BUILD_DIR)
-	ar rc my_smart_calc.a $(OBJS)
-	ranlib my_smart_calc.a
+	ar rc s21_smart_calc.a $(OBJS)
+	ranlib s21_smart_calc.a
 
 $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
@@ -92,17 +92,11 @@ dvi:
 
 clean: 
 	rm -f *.gcda *.gcov *.o *.gcno
-	rm -f my_smart_calc.a
+	rm -f s21_smart_calc.a
 	rm -rf $(BUILD_DIR) $(GCOV_DIR)
 	rm -rf *out *info
 	rm -rf $(DOC_DIR) $(TAR_DIR) ../$(TAR_DIR).tgz
 
 style:
-	clang-format -i $(SRC)
+	clang-format -style=Google -n $(SRC)
 
-debug:
-	gcc $(CC_FLAGS) -fsanitize=address $(FILES) backend/test.c -o debug.out
-	@echo
-	./debug.out
-	@echo
-	rm debug.out

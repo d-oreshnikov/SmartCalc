@@ -3,8 +3,8 @@
 
 #include <QWidget>
 
-extern "C" {   
-#include "../../backend/calculation/calculation.h"
+extern "C" {
+#include "../../backend/calculate/calculation.h"
 }
 
 namespace Ui { class Graph; }
@@ -13,21 +13,14 @@ class Graph : public QWidget {
     Q_OBJECT
 
 public:
-    /**
-     * @brief Graph class constructor. Also connects graph drawing button with backend
-     * 
-     * @param parent Parent class value
-     */
+    // Graph class constructor. Also connects graph drawing button with backend
+
     Graph(QWidget* parent = nullptr);
 
-    /**
-     * @brief Graph class destructor. Cleans allocated memory and destroy Graph object
-     */
+    //  Graph class destructor. Cleans allocated memory and destroy Graph object
     ~Graph();
 
-    /**
-     * @brief Function 
-     */
+    // Functions
     void scalling();
     void setscale();
     eflag plot(char* equation);

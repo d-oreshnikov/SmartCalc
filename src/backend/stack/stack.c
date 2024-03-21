@@ -1,122 +1,77 @@
 #include "stack.h"
 
-eflag _sinit(stack *stk) {
-    /*
-    Description:
-        Initializes stack_t object
+// stack init
+eflag stinit(stack *stk) {
+  eflag flag = SUCCESS;
 
-    Args:
-        (stack*) stk : Pointer to stack object
-
-    Returns:
-        If stack initialized successfully flag
-    */
-
-    if (!stk) return NULL_PTR;
-
+  if (!stk)
+    flag = NULL_PTR;
+  else {
     stk->head = NULL;
     stk->size = 0;
-
-    return SUCCESS;
+  }
+  return flag;
 }
 
-eflag cnode(node *src, token *tk) {
-    /*
-    Description:
-        Initializes node_t object with the respect to dtype
+eflag spush(stack *stk, token *tk) {
+  eflag flag = SUCCESS;
 
-    Args:
-        (node*) src       : Pointer to node to be initialized
-        (token) tk        : Pointer to the token data value
+  if (!stk)
+    flag = NULL_PTR;
+  else {
+    node *nnode = (node *)calloc(1, sizeof(node));
+    eflag node_flag = nodeinit(nnode, tk);
+    if (node_flag)
+      flag = node_flag;
+    else {
+      nnode->next = stk->head;
+      stk->head = nnode;
+      stk->size++;
+    }
+  }
 
-    Returns:
-        If node initialized correctly flag
-    */
+  return flag;
+}
 
-    if (!src) return FAILED_ALLOC;
-
+// node init
+eflag nodeinit(node *src, token *tk) {
+  eflag flag = SUCCESS;
+  if (!src)
+    flag = FAILED_ALLOC;
+  else {
     src->data = tk;
     src->next = NULL;
-
-    return SUCCESS;
+  }
+  return flag;
 }
 
-eflag _spush(stack *stk, token *tk) {
-    /*
-    Description:
-        Pushes new token onto the stack
+// pop value from stack and return it back
+token *spop(stack *stk) {
+  if (!stk) return NULL;
 
-    Args:
-        (stack*) head  : Pointer to the stack object
-        (token) tk     : Pointer to the token data value
+  token *res = stk->head->data;
 
-    Returns:
-        If data pushed successfully flag
-    */
-
-    if (!stk) return NULL_PTR;
-
-    node *nnode = (node *)calloc(1, sizeof(node));
-    eflag flag = cnode(nnode, tk);
-    if (flag) return flag;
-
-    nnode->next = stk->head;
-    stk->head = nnode;
-    stk->size++;
-
-    return SUCCESS;
+  node *temp_head = stk->head;
+  stk->head = stk->head->next;
+  free(temp_head);
+  stk->size--;
+  return res;
 }
 
-token *_spop(stack *stk) {
-    /*
-    Description:
-        Pops value from stack and returns its value
+// destroys stack
+eflag sdestroy(stack *stk) {
+  if (!stk) return NULL_PTR;
+  if (!stk->head) return NULL_PTR;
 
-    Args:
-        (stack*) stk : Pointer to the stack object
+  node *curr = stk->head;
+  node *next = NULL;
+  do {
+    next = curr->next;
+    free(curr);
+    curr = next;
+    next = NULL;
+  } while (curr);
 
-    Returns:
-        Popped data
-    */
-
-    if (!stk) return NULL;
-
-    token *res = stk->head->data;
-
-    node *thead = stk->head;
-    stk->head = stk->head->next;
-    free(thead);
-    stk->size--;
-
-    return res;
-}
-
-eflag _sdestroy(stack *stk) {
-    /*
-    Description:
-        Destroys stack object
-
-    Args:
-        (stack*) stk : Pointer to the stack to destroy
-
-    Returns:
-        If stack destroyed successfully flag
-    */
-
-    if (!stk) return NULL_PTR;
-    if (!stk->head) return NULL_PTR;
-
-    node *curr = stk->head;
-    node *next = NULL;
-
-    do {
-        next = curr->next;
-        free(curr);
-        curr = next;
-        next = NULL;
-    } while (curr);
-
-    stk = NULL;
-
-    return SUCCESS;
+  stk = NULL;
+  return SUCCESS;
 }

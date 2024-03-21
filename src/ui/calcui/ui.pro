@@ -15,23 +15,23 @@ SOURCES += \
     qcustomplot.cpp \
     main.cpp \
     calcwindow.cpp \
-    ../../backend/calculation/calculation.c \
-    ../../backend/calculation/cutils.c \
+    ../../backend/calculate/calculation.c \
+    ../../backend/calculate/calc_help_func.c \
     ../../backend/parser/parser.c \
-    ../../backend/parser/putils.c \
+    ../../backend/parser/help_func.c \
     ../../backend/stack/stack.c \
-    ../../backend/stack/clstack/clstack.c
+    ../../backend/stack/calcstack/cstack.c
 
 HEADERS += \
     graph.h \
     qcustomplot.h \
     calcwindow.h \
-    ../../backend/calculation/calculation.h \
-    ../../backend/calculation/cutils.h \
+    ../../backend/calculate/calculation.h \
+    ../../backend/calculate/calc_help_func.h \
     ../../backend/parser/parser.h \
-    ../../backend/parser/putils.h \
+    ../../backend/parser/help_func.h \
     ../../backend/stack/stack.h \
-    ../../backend/stack/clstack/clstack.h \
+    ../../backend/stack/calcstack/cstack.h \
 
 FORMS += \
     calcwindow.ui \

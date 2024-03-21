@@ -10,10 +10,9 @@ CalcWindow::CalcWindow(QWidget *parent)
 
     // Util buttons
     connect(ui->ButtonGraph, SIGNAL(clicked()), this, SLOT(cgraph()));
+//    connect(ui->ButtonDeposit, SIGNAL(clicked()), this, SLOT(cdepos()));
+//    connect(ui->ButtonCredit, SIGNAL(clicked()), this, SLOT(ccredit()));
     connect(ui->ButtonBackspace, SIGNAL(clicked()), this, SLOT(mbackspace()));
-    connect(ui->ButtonMemoryRemove, SIGNAL(clicked()), this, SLOT(mmemory()));
-    connect(ui->ButtonMemoryAdd, SIGNAL(clicked()), this, SLOT(mmemory()));
-    connect(ui->ButtonMemoryGet, SIGNAL(clicked()), this, SLOT(mmemory()));
 
     // Number buttons
     connect(ui->Button0, SIGNAL(clicked()), this, SLOT(psignal()));
@@ -60,6 +59,8 @@ CalcWindow::CalcWindow(QWidget *parent)
     connect(ui->ButtonEqual, SIGNAL(clicked()), this, SLOT(psignal()));
 }
 
+
+//CalcWindow destructor. Cleans allocated memory and destroy CalcWindow object
 CalcWindow::~CalcWindow()
 {
     delete ui;
@@ -83,12 +84,13 @@ void CalcWindow::psignal() {
     mequation();
 }
 
+//  Function for handling backspace button
 void CalcWindow::mbackspace() {
     QPushButton* button = (QPushButton*)sender();
     QString newedit = ui->InputDisplay->text();
 
-    if (button->text() == "Backspace" && newedit == "") scursor();
-    else if (button->text() == "Backspace") {
+    if (button->text() == "Del" && newedit == "") scursor();
+    else if (button->text() == "Del") {
         newedit.chop(1);
     }
 
@@ -97,24 +99,6 @@ void CalcWindow::mbackspace() {
 
 void CalcWindow::scursor() { ui->InputDisplay->setCursorPosition(0); }
 
-void CalcWindow::mmemory() {
-    QPushButton* button = (QPushButton*)sender();
-
-    if (button->text() == "M") {
-        if (buf.size() > 0) {
-            ui->InputDisplay->setText("");
-            ui->InputDisplay->setText(buf);
-        } else if (!mbuf) return;
-        else ui->InputDisplay->setText("");
-        mbuf = !mbuf;
-    } else if (button->text() == "M+") {
-        buf = ui->InputDisplay->text();
-        mbuf |= true;
-    } else if (button->text() == "M-") {
-        buf = "";
-        mbuf |= true;
-    }
-}
 
 void CalcWindow::mequation() {
     QPushButton* button = (QPushButton*)sender();

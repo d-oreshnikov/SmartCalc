@@ -40,6 +40,15 @@
      <height>1000</height>
     </size>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit {
+	background-color: rgb(77, 76, 79);
+	border: 1px solid gray;
+	border-radius: 4px;
+	color: #fff;
+	margin-bottom: 30px;
+}</string>
+   </property>
   </widget>
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
@@ -49,6 +58,22 @@
      <width>241</width>
      <height>101</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string>QPushButton {
+	background-color: #fff;
+	border: 1px solid gray;
+	border-radius: 4px;
+	background-color: rgb(119, 118, 123);
+	color: white;
+}
+
+QPushButton::pressed {
+	background-color: #D5D2D2;
+	border: 1px solid gray;
+	border-radius: 4px;
+	color: white;
+}</string>
    </property>
    <property name="currentIndex">
     <number>0</number>
@@ -387,8 +412,8 @@
 	background-color: #fff;
 	border: 1px solid gray;
 	border-radius: 4px;
-	background-color: white;
-	color: black;
+	background-color: rgb(119, 118, 123);
+	color: white;
 }
 
 QPushButton::pressed {
@@ -421,8 +446,8 @@ QPushButton::pressed {
 	background-color: #fff;
 	border: 1px solid gray;
 	border-radius: 4px;
-	background-color: white;
-	color: black;
+	background-color: rgb(119, 118, 123);
+	color: white;
 }
 
 QPushButton::pressed {
